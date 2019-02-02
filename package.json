@@ -1,5 +1,5 @@
 {
-  "name": "lesson-3",
+  "name": "lesson-4",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -17,7 +17,7 @@
     "morgan": "~1.9.0",
     "popper.js": "^1.14.6"
   },
-  "description": "Express generator demo",
+  "description": "MongoDB demo",
   "main": "server.js",
   "author": "Nikesh Patel",
   "license": "ISC",
@@ -27,5 +27,13 @@
     "@types/express": "^4.16.1",
     "@types/morgan": "^1.7.35",
     "@types/node": "^10.12.18"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pnikesh/Lesson-4.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pnikesh/Lesson-4/issues"
+  },
+  "homepage": "https://github.com/pnikesh/Lesson-4#readme"
 }
