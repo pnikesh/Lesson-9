@@ -1,0 +1,38 @@
+<%include ../partials/header.ejs %>
+
+<!--contents goes here-->
+<!--div.container>div.row>div.col-md-offset-3.col-md-6-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+            <h1><%= title %></h1>
+            <br />
+            <!--table.table.table-bordered.table-striped.table.hover>tr>th*5.text-center-->
+            <table class="table table-bordered table-striped hover">
+                <!-- Header row-->
+                <tr>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Description</th>
+                    
+            
+                </tr>
+                <!--Templet Row-->
+                <% for(let count = 0; count < favouriteThingsList.length; count++) { %>
+                <tr>
+                    <td class="text-center">
+                        <%= favouriteThingsList[count].name %>
+                    </td>
+                    <td class="text-center">
+                        <%= favouriteThingsList[count].desc %>
+                    </td>
+                </tr>
+                <% } %>
+            
+            </table>
+        </div>
+    </div>
+</div>
+ 
+<%include ../partials/footer.ejs %>
+
+
