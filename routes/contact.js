@@ -88,4 +88,19 @@ router.post("/edit/:id", (req, res, nest) => {
   });
 });
 
+/*GET rewuest to perform DELETE operation */
+router.get('/delete/:id',(req,res,next) => {
+    let id = req.params.id;
+
+    contactModel.remove({_id: id}, (err) => {
+        if (err) {
+            console.log(err);
+            res.end(err);
+          } else {
+            //refres contact list
+            res.redirect("/contact-list");
+          }
+    })
+});
+
 module.exports = router;
