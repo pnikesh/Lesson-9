@@ -6,7 +6,7 @@ let logger = require('morgan');
 
 //databse set up
 let mongoose = require("mongoose");
-let DB = require("./config/db");
+let DB = require("./db");
 
 //point mongoose to DB URI
 mongoose.connect(DB.URI);
@@ -18,24 +18,24 @@ mongoDB.once('open',()=>{
 })
 
 //route setup
-let indexRouter = require('./routes/index');
+let indexRouter = require('../routes/index');
 //let usersRouter = require('./routes/users');
-let contactRouter = require('./routes/contact');
-let favouriteRouter = require('./routes/favourite');
+let contactRouter = require('../routes/contact');
+let favouriteRouter = require('../routes/favourite');
 
 
 let app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'node_modules')));
+app.use(express.static(path.join(__dirname, '../../public')));
+app.use(express.static(path.join(__dirname, '../../node_modules')));
 
 app.use('/', indexRouter);
 //app.use('/users', usersRouter);
