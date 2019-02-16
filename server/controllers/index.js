@@ -24,3 +24,23 @@ module.exports.displayServicePage =  (req, res, next) => {
 /*module.exports,displayFavouritePage =  (req, res, next) => {
     res.render('index', { title: 'Favourites' });
 }*/
+
+module.exports.displayLoginPage = (req, res, next) => {
+
+}
+
+module.exports.processLoginPage = (req, res, next) => {
+    
+}
+
+module.exports.displayRegistrationPage = (req, res, next) => {
+    
+}
+
+module.exports.processRrgistrationPage = (req, res, next) => {
+    
+}
+
+module.exports.performLogout = (req, res, next) => {
+    
+}
