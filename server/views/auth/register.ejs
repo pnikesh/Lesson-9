@@ -1,0 +1,43 @@
+<%include ../partials/header.ejs %>
+
+<main class="container">
+   
+    <div class="row">
+        <div class="col-md-offset-4 col-md-4">
+            <h1> Please Login </h1>
+            <form method="POST">
+                <fieldset class="form-group">
+                    <lable for="username">Username</lable>
+                    <input type="text" class="form-control" id="username"
+                    name="username" required autofocus>
+                </fieldset>
+                <fieldset class="form-group">
+                        <lable for="password">Password</lable>
+                        <input type="password" class="form-control" id="password"
+                        name="password" required>
+                       
+                </fieldset>
+                <fieldset class="form-group">
+                        <lable for="email">Email</lable>
+                        <input type="email" class="form-control" id="email"
+                        name="email" placeholder="Enter Password" required>
+                        
+                </fieldset>
+                <fieldset class="form-group">
+                        <lable for="displayName">DIsplay Name</lable>
+                        <input type="displayName" class="form-control" id="displayName"
+                        name="displayName" required>
+                        
+                </fieldset>
+                <fieldset class="form-group text-right">
+                        <input type="submit" class="btn btn-success" value="Register">
+                        <a href="/">
+                            <input type="button" class="btn btn-warning" value="Cancle">
+                        </a>
+                    </fieldset>
+            </form>
+        </div>
+    </div>
+</main>
+
+<%include ../partials/footer.ejs %>
