@@ -32,9 +32,9 @@ router.get("/add", (req, res, nest) => {
 /*POST route for processing the add page*/
 router.post("/add", (req, res, next) => {
   let newContact = contactModel({
-    "first_name": req.body.firstName,
-    "last_name": req.body.lastName,
-    "age": req.body.age
+    first_name: req.body.firstName,
+    last_name: req.body.lastName,
+    age: req.body.age
   });
 
   contactModel.create(newContact, (err, contactModel) => {
@@ -43,6 +43,46 @@ router.post("/add", (req, res, next) => {
       res.end(err);
     } else {
       //refresh contact list
+      res.redirect("/contact-list");
+    }
+  });
+});
+
+/*GET REquest ro display edit page*/
+
+router.get("/edit/:id", (req, res, next) => {
+  let id = req.params.id;
+  contactModel.findById(id, (err, contactObject) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      //show thw edit view
+      res.render("contacts/edit", {
+        title: "Edit Contact",
+        contact: contactObject
+      });
+    }
+  });
+});
+
+/**POST request - UPDATE DB with data from edit page*/
+router.post("/edit/:id", (req, res, nest) => {
+  let id = req.params.id;
+
+  let updatedContact = contactModel({
+    "_id": id,
+    "first_name": req.body.firstName,
+    "last_name": req.body.lastName,
+    "age": req.body.age
+  });
+
+  contactModel.update({ _id: id }, updatedContact, err => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      //refres contact list
       res.redirect("/contact-list");
     }
   });
