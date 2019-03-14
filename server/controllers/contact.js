@@ -1,6 +1,6 @@
 let express = require("express");
 let router = express.Router();
-
+let jwt = require('jsonwebtoken');
 
 //creates a reference to the contact model
 let contactModel = require("../models/contact");
@@ -11,22 +11,16 @@ module.exports.displayContactList = (req, res, next) => {
       //console.log(contactList);
       if (err) {
         return console.error(err);
-      } else {
+      } 
+      else {
         console.log(contactList);
-        res.render("contacts/index", {
-          title: "Contact List",
-          contactList: contactList,
-          displayName: req.user ? req.user.displayName : ""
-        });
+        res.json({success: true, msg: 'Contact List Displayed Successfully', contactList: contactList, user: req.user});
       }
     });
 }
 
 module.exports.displayAddPage = (req, res, nest) => {
-    res.render("contacts/add", {
-      title: "Add New Contact",
-      displayName: req.user ? req.user.displayName : ""
-    });
+  res.json({success: true, msg: 'Successfully Displayed Add Page'});
 }
 
 module.exports.processAddPage = (req, res, next) => {
@@ -42,7 +36,7 @@ module.exports.processAddPage = (req, res, next) => {
         res.end(err);
       } else {
         //refresh contact list
-        res.redirect("/contact-list");
+        res.json({success: true, msg: 'Successfully Added New Contact'});
       }
     });
 }
@@ -55,11 +49,7 @@ module.exports.displayEditPage =  (req, res, next) => {
         res.end(err);
       } else {
         //show thw edit view
-        res.render("contacts/edit", {
-          title: "Edit Contact",
-          contact: contactObject,
-          displayName: req.user ? req.user.displayName : ""
-        });
+        res.json({success: true, msg: 'Successfully Displayed Contact to Edit', contact: contactObject});
       }
     });
   }
@@ -80,7 +70,7 @@ module.exports.displayEditPage =  (req, res, next) => {
         res.end(err);
       } else {
         //refres contact list
-        res.redirect("/contact-list");
+        res.json({success: true, msg: 'Successfully Edited Contact', contact: updatedContact});
       }
     });
 }

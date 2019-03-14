@@ -2,10 +2,14 @@ let express = require("express");
 let mongoose = require("mongoose");
 let passport = require("passport");
 
+let jwt = require('jsonwebtoken');
+let DB = require('../config/db');
+
 //references to define user model
 let UserModel = require("../models/user");
 let User = UserModel.User; //alias for UserModel
 
+/*
 module.exports.displayHomePage = (req, res, next) => {
   res.render("index", { title: "Home" });
 };
@@ -26,9 +30,7 @@ module.exports.displayServicePage = (req, res, next) => {
   res.render("index", { title: "Services" });
 };
 
-/*module.exports,displayFavouritePage =  (req, res, next) => {
-    res.render('index', { title: 'Favourites' });
-}*/
+
 
 module.exports.displayLoginPage = (req, res, next) => {
   // check if user is already logged in
@@ -42,6 +44,7 @@ module.exports.displayLoginPage = (req, res, next) => {
     return res.redirect("/");
   }
 };
+*/
 
 module.exports.processLoginPage = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
@@ -51,19 +54,38 @@ module.exports.processLoginPage = (req, res, next) => {
     }
     // is there a user login error?
     if (!user) {
-      req.flash("loginMessage", "Authentication Error");
-      return res.redirect("/login");
+     // req.flash("loginMessage", "Authentication Error");
+     return res.json({success: false, msg: 'ERROR: Failed to Log In User!'});
     }
     req.logIn(user, err => {
       // server error?
       if (err) {
         return next(err);
       }
-      return res.redirect("/contact-list");
+
+      const payload = {
+        id: user._id,
+        displayName: user.displayName,
+        username: user.username,
+        email: user.email
+      }
+
+      const authToken = jwt.sign(payload, DB.secret, {
+        expiresIn: 604800 // 1 Week
+      });
+
+      return res.json({success: true, msg: 'User Logged in Successfully!', user: {
+        id: user._id,
+        displayName: user.displayName,
+        username: user.username,
+        email: user.email
+      }, token: authToken});
+
     });
   })(req, res, next);
 };
 
+/*
 module.exports.displayRegistrationPage = (req, res, next) => {
   if (!req.user) {
     res.render("auth/register", {
@@ -75,6 +97,8 @@ module.exports.displayRegistrationPage = (req, res, next) => {
     return res.redirect("/"); // already register
   }
 };
+*/
+
 
 module.exports.processRegistrationPage = (req, res, next) => {
   let newUser = new User({
@@ -88,34 +112,20 @@ module.exports.processRegistrationPage = (req, res, next) => {
     if (err) {
       console.log("Error in inserting new User");
       if (err.name == "UserExistsError") {
-        req.flash("registerMessage", "User already exist");
+        console.log("Error: User Already Exists!");
       }
-      return res.render("auth/register", {
-        title: "Register",
-        messages: req.flash("registerMessage"),
-        dispalyName: req.user ? req.user.dispalyName : ""
-      });
+      return res.json({success: false, msg: 'ERROR: Failed to Register User!'});
+      
     } else {
       // if no error exists, then registration is successful
 
       // redirect the user
-      return passport.authenticate("local")(req, res, () => {
-        res.redirect("/contact-list");
-      });
+      return res.json({success: true, msg: 'User Registered Successfully!'});
     }
   });
-  //if registration is successfull
-  return passport.authenticate(
-    "local",
-    (req,
-    res,
-    () => {
-      res.redirect("/");
-    })
-  );
 };
 
 module.exports.performLogout = (req, res, next) => {
   req.logout();
-  res.redirect("/"); //back to home page
+  res.json({success: true, msg: 'User Successfully Logged out!'}); //back to home page
 };

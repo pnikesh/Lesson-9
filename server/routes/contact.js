@@ -1,6 +1,8 @@
 let express = require("express");
 let router = express.Router();
 
+let jwt = require('jsonwebtoken');
+
 let contactController = require("../controllers/contact");
 
 function requireAuth(req, res, next) {
@@ -12,22 +14,22 @@ function requireAuth(req, res, next) {
 }
 
 /* GET contacts list - READ */
-router.get("/", requireAuth, contactController.displayContactList);
+router.get("/", contactController.displayContactList);
 
 /*get route for add page
-it ill display add page*/
-router.get("/add",requireAuth, contactController.displayAddPage);
+it will display add page*/
+router.get("/add",contactController.displayAddPage);
 
 /*POST route for processing the add page*/
-router.post("/add",requireAuth, contactController.processAddPage);
+router.post("/add", contactController.processAddPage);
 
 /*GET REquest ro display edit page*/
-router.get("/edit/:id",requireAuth, contactController.displayEditPage);
+router.get("/edit/:id", contactController.displayEditPage);
 
 /**POST request - UPDATE DB with data from edit page*/
-router.post("/edit/:id",requireAuth, contactController.processEditPage);
+router.post("/edit/:id",contactController.processEditPage);
 
 /*GET rewuest to perform DELETE operation */
-router.get("/delete/:id",requireAuth, contactController.performDelete);
+router.get("/delete/:id", contactController.performDelete);
 
 module.exports = router;
