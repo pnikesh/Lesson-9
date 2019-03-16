@@ -9,6 +9,8 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { ContactListComponent } from './contacts/contact-list/contact-list.component';
 import { ContactDetailsComponent } from './contacts/contact-details/contact-details.component';
 import { ContactDeleteComponent } from './contacts/contact-delete/contact-delete.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent, data: {title: 'Home'}},
@@ -21,6 +23,9 @@ const routes: Routes = [
   {path: 'contact/contact-list/edit/:id', component: ContactDetailsComponent, data: {title: 'Edit Contact'}},
   {path: 'contact/contact-list/delete/:id', component: ContactDeleteComponent, data: {title: 'Delete Contact'}},
 
+  {path: 'register', component: RegisterComponent, data: {title: 'Register'}},
+  {path: 'login', component: LoginComponent, data: {title: 'Log In'}},
+  {path: 'logout', redirectTo: '/login', pathMatch: 'full'},
 
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
