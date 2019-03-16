@@ -1,5 +1,5 @@
 {
-  "name": "lesson-8",
+  "name": "lesson-9",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -45,10 +45,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pnikesh/Lesson-8.git"
+    "url": "git+https://github.com/pnikesh/Lesson-9.git"
   },
   "bugs": {
-    "url": "https://github.com/pnikesh/Lesson-8/issues"
+    "url": "https://github.com/pnikesh/Lesson-9/issues"
   },
-  "homepage": "https://github.com/pnikesh/Lesson-8#readme"
+  "homepage": "https://github.com/pnikesh/Lesson-9#readme"
 }
