@@ -3,18 +3,22 @@
   <div class="row">
       <div class="col-md-offset-4 col-md-4">
           <h1> Please Login </h1>
-          <form  autocomplete="off">
+          <form  autocomplete="off" (submit) = "onLogInSubmit">
               <fieldset class="form-group">
                   <lable for="username">Username</lable>
-                  <input type="text" class="form-control" id="username"
+                  <input type="text" class="form-control"
+                  [(ngModel)] = "user.username"
+                  id="username"
                   name="username" placeholder="Enter Username" required autofocus autocomplete="off">
               </fieldset>
               <fieldset class="form-group">
                       <lable for="password">Password</lable>
-                      <input type="password" class="form-control" id="password"
+                      <input type="password" class="form-control"
+                      [(ngModel)] = "user.password"
+                      id="password"
                       name="password" placeholder="Enter Password" required autocomplete="off">
                       or
-                      <a href="/register">Register Here</a>
+                      <a routerLink="/register">Register Here</a>
               </fieldset>
               <fieldset class="form-group text-right">
                   <input type="submit" class="btn btn-success" value="Login">
